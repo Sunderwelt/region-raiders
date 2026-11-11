@@ -37,7 +37,7 @@
 /* v0.6: 3D-rendered background art with interactive accessible hotspots.
    Upload assets/michigan-city-map.webp to enable the image.
    The gradient/CSS city remains a fallback until the image is present. */
-.city-map.michigan-art{height:auto;aspect-ratio:3/4;background-image:url('assets/michigan-city-map.webp'),linear-gradient(150deg,#248cc1 0 30%,#87bd6c 50%,#587b46);background-position:center;background-size:cover}
+.city-map.michigan-art{height:auto;aspect-ratio:3/4;background-image:none;background-position:center;background-size:cover}
 .city-map.michigan-art .lake,.city-map.michigan-art .shore,.city-map.michigan-art .road,.city-map.michigan-art .map-decor{display:none}
 .city-map.michigan-art .map-building.art-hotspot{width:112px;height:52px;transform:none;border-radius:14px;background:linear-gradient(155deg,#ffe8a2,#e6a64b)!important;border:3px solid #fff0b0!important;box-shadow:0 5px 0 #80522e,0 9px 12px #0007!important;filter:none;padding:3px;gap:0;z-index:5}
 .city-map.michigan-art .map-building.art-hotspot.picked{outline:3px solid #fff45e;outline-offset:2px;transform:scale(1.06)}
@@ -62,7 +62,7 @@
 @media(max-width:390px){.city-map.michigan-art .landmark-fallback{width:106px;height:98px}.city-map.michigan-art .landmark-fallback .landmark-svg{width:106px;height:96px}}
 
 /* v0.9 scenery-only map and mobile-safe selectable building tiles */
-.city-map.michigan-art{background:#6cae72 url('assets/michigan-city-scenery.svg') center/100% 100% no-repeat!important;overflow:hidden}
+.city-map.michigan-art{background:#6cae72 url('assets/michigan-city-scenery.svg?v=20261111b') center/100% 100% no-repeat!important;overflow:hidden}
 .city-map.michigan-art .map-building.layered-landmark{width:clamp(88px,25%,135px);height:55px;transform:translate(-50%,0);box-sizing:border-box}
 .city-map.michigan-art .map-building.layered-landmark.picked{transform:translate(-50%,-3px) scale(1.03)}
 .city-map.michigan-art .map-building.layered-landmark .landmark-fallback{bottom:calc(100% + 2px)}
