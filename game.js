@@ -1,6 +1,6 @@
 'use strict';
 const KEY='region-raiders-v1';
-const landmarks=[{name:'Michigan City Lighthouse',icon:'🌊',base:120},{name:'Washington Park',icon:'🎡',base:180},{name:'Blue Chip District',icon:'🏙️',base:250},{name:'Franklin Street',icon:'🏪',base:320},{name:'Lakefront Pier',icon:'⚓',base:400}];
+const landmarks=[{name:'East Pierhead Lighthouse',icon:'🌊',base:120},{name:'Washington Park & Zoo',icon:'🌳',base:180},{name:'Blue Chip District',icon:'🏙️',base:250},{name:'Franklin Street',icon:'🏪',base:320},{name:'Michigan City Marina',icon:'⚓',base:400}];
 const laporteLandmarks=[{name:'La Porte Courthouse',icon:'🏛️',base:600},{name:'Pine Lake',icon:'⛵',base:750},{name:'Fox Memorial Park',icon:'🌳',base:900},{name:'Downtown La Porte',icon:'🏘️',base:1100},{name:'Soldiers Memorial Park',icon:'🌲',base:1350}];
 let activeCity='michigan';
 const currentLandmarks=()=>activeCity==='michigan'?landmarks:laporteLandmarks;
@@ -65,7 +65,7 @@ function landmarkArt(i,level){
  return '<svg class="landmark-svg" viewBox="0 0 148 132" xmlns="http://www.w3.org/2000" aria-hidden="true">'+base+art+'</svg>';
 }
 
-function renderMap(){const positions=[[12,16],[55,14],[28,46],[64,48],[8,72]];const map=$('mapBuildings');map.innerHTML='';currentLandmarks().forEach((b,i)=>{const level=previewLevel<0?currentLevels()[i]:previewLevel;const tile=document.createElement('button');tile.type='button';tile.className='map-building'+(selectedBuilding===i?' picked':'')+(level?' upgraded':'');tile.style.left=positions[i][0]+'%';tile.style.top=positions[i][1]+'%';tile.setAttribute('aria-label',b.name+', '+(previewLevel<0?'level ':'preview level ')+level);tile.innerHTML=landmarkArt(i,level)+'<span class="map-level">'+level+'/5</span>';tile.addEventListener('click',()=>{selectedBuilding=i;render();});map.append(tile);});}
+function renderMap(){const mapFrame=$('cityMap');mapFrame.classList.toggle('michigan-art',activeCity==='michigan');const positions=activeCity==='michigan'?[[31,11],[75,17],[68,47],[14,72],[10,46]]:[[12,16],[55,14],[28,46],[64,48],[8,72]];const map=$('mapBuildings');map.innerHTML='';currentLandmarks().forEach((b,i)=>{const level=previewLevel<0?currentLevels()[i]:previewLevel;const tile=document.createElement('button');tile.type='button';tile.className='map-building'+(selectedBuilding===i?' picked':'')+(level?' upgraded':'')+(activeCity==='michigan'?' art-hotspot':'');tile.style.left=positions[i][0]+'%';tile.style.top=positions[i][1]+'%';tile.setAttribute('aria-label',b.name+', '+(previewLevel<0?'level ':'preview level ')+level);tile.innerHTML=(activeCity==='michigan'?'<span class="hotspot-name">'+b.name+'</span>':landmarkArt(i,level))+'<span class="map-level">'+level+'/5</span>';tile.addEventListener('click',()=>{selectedBuilding=i;render();});map.append(tile);});}
 function upgrade(i){if(currentLevels()[i]>=5)return;const price=cost(i);if(state.coins<price)return;state.coins-=price;currentLevels()[i]++;save();render();const tile=$('mapBuildings').children[i];if(tile){tile.classList.add('build-pop');setTimeout(()=>tile.classList.remove('build-pop'),650);}}
 let busy=false;
 function randomSymbol(){return symbols[Math.floor(Math.random()*symbols.length)];}
