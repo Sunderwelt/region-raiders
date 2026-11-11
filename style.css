@@ -33,3 +33,14 @@
 .lake{background:linear-gradient(155deg,#0865b8,#37b8e5 65%,#91e7ff);box-shadow:inset 0 -10px 16px #0b6a9c66}
 .map-building{filter:drop-shadow(5px 9px 2px #183d3888)}
 .landmark-svg{filter:drop-shadow(4px 6px 2px #1a413999)}
+
+/* v0.6: 3D-rendered background art with interactive accessible hotspots.
+   Upload assets/michigan-city-map.webp to enable the image.
+   The gradient/CSS city remains a fallback until the image is present. */
+.city-map.michigan-art{height:auto;aspect-ratio:3/4;background-image:url('assets/michigan-city-map.webp'),linear-gradient(150deg,#248cc1 0 30%,#87bd6c 50%,#587b46);background-position:center;background-size:cover}
+.city-map.michigan-art .lake,.city-map.michigan-art .shore,.city-map.michigan-art .road,.city-map.michigan-art .map-decor{display:none}
+.city-map.michigan-art .map-building.art-hotspot{width:112px;height:52px;transform:none;border-radius:14px;background:linear-gradient(155deg,#ffe8a2,#e6a64b)!important;border:3px solid #fff0b0!important;box-shadow:0 5px 0 #80522e,0 9px 12px #0007!important;filter:none;padding:3px;gap:0;z-index:5}
+.city-map.michigan-art .map-building.art-hotspot.picked{outline:3px solid #fff45e;outline-offset:2px;transform:scale(1.06)}
+.city-map.michigan-art .hotspot-name{font-size:10px;font-weight:900;line-height:1.05;color:#392b19;text-align:center;text-shadow:0 1px #fff9}
+.city-map.michigan-art .map-level{position:static;box-shadow:none;font-size:10px;padding:1px 8px}
+@media(max-width:390px){.city-map.michigan-art .map-building.art-hotspot{width:96px;height:51px}.city-map.michigan-art .hotspot-name{font-size:9px}}
