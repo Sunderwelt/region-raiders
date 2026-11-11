@@ -26,3 +26,10 @@
 @media(max-width:390px){.map-building{width:82px;height:90px}.landmark-svg{width:90px;height:82px}.map-level{left:25px}}
 
 .art-controls{display:grid;gap:7px;margin:17px 0 10px;padding:12px;border-radius:14px;background:#253c68;text-align:left}.art-controls label{font-weight:700;font-size:14px}.art-controls input{width:100%;accent-color:#ffd45a}.art-controls small{font-size:11px;color:#d5e3ff;line-height:1.5}
+
+/* v0.5 city navigation and deeper dimensional scenery */
+.city-switch{display:flex;gap:8px;margin-bottom:20px}.city-switch button{flex:1;background:#30456e;font-size:13px;padding:12px 6px}.city-switch button.active{background:linear-gradient(#58a5fa,#2465bf);border-bottom:4px solid #123f85}
+.city-map{background:radial-gradient(ellipse at 65% 55%,#a7d985,#69b36d 78%);box-shadow:inset 0 0 30px #245b4766,0 14px 0 #476c4c,0 24px 30px #0006;perspective:450px}
+.lake{background:linear-gradient(155deg,#0865b8,#37b8e5 65%,#91e7ff);box-shadow:inset 0 -10px 16px #0b6a9c66}
+.map-building{filter:drop-shadow(5px 9px 2px #183d3888)}
+.landmark-svg{filter:drop-shadow(4px 6px 2px #1a413999)}
