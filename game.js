@@ -83,7 +83,7 @@ function renderMap(){
    image.className='landmark-stage-image';
    image.alt='';image.loading='lazy';image.decoding='async';
    image.src='assets/michigan-city/'+michiganAssetNames[i]+'/level-'+level+'.webp';
-   image.onerror=()=>{image.hidden=true;tile.classList.add('stage-asset-missing');};
+   image.onerror=()=>{image.hidden=true;tile.classList.add('stage-asset-missing');const fallback=document.createElement('span');fallback.className='landmark-fallback';fallback.innerHTML=landmarkArt(i,level);tile.prepend(fallback);};
    tile.append(image);
    const title=document.createElement('span');title.className='hotspot-name';title.textContent=b.name;tile.append(title);
   }else{tile.innerHTML=landmarkArt(i,level);}
