@@ -16,3 +16,11 @@
 .reels.rolling>div{animation:reelshake .13s infinite alternate}@keyframes reelshake{to{transform:translateY(5px);filter:blur(1px)}}
 @media(max-width:390px){.city-map{height:345px}.map-building{width:65px;height:70px}.map-icon{font-size:31px}}
 @media(prefers-reduced-motion:reduce){.reels.rolling>div,.build-pop{animation:none}}
+
+/* Phase 2.1 illustrated structures: geometry changes at each upgrade */
+.map-building{width:104px;height:108px;padding:0;background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible;transform:translate(-12%,-10%);border-radius:0}
+.map-building.picked{outline:0;filter:drop-shadow(0 0 7px #ffe44d);transform:translate(-12%,-16%) scale(1.08)}
+.landmark-svg{width:112px;height:100px;overflow:visible;filter:drop-shadow(4px 8px 2px #31534299)}
+.map-level{position:absolute;bottom:1px;left:36px;font-size:12px;box-shadow:0 2px 4px #0005}
+.map-building.upgraded{background:transparent!important}
+@media(max-width:390px){.map-building{width:82px;height:90px}.landmark-svg{width:90px;height:82px}.map-level{left:25px}}
