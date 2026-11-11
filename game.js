@@ -65,7 +65,33 @@ function landmarkArt(i,level){
  return '<svg class="landmark-svg" viewBox="0 0 148 132" xmlns="http://www.w3.org/2000" aria-hidden="true">'+base+art+'</svg>';
 }
 
-function renderMap(){const mapFrame=$('cityMap');mapFrame.classList.toggle('michigan-art',activeCity==='michigan');const positions=activeCity==='michigan'?[[31,11],[75,17],[68,47],[14,72],[10,46]]:[[12,16],[55,14],[28,46],[64,48],[8,72]];const map=$('mapBuildings');map.innerHTML='';currentLandmarks().forEach((b,i)=>{const level=previewLevel<0?currentLevels()[i]:previewLevel;const tile=document.createElement('button');tile.type='button';tile.className='map-building'+(selectedBuilding===i?' picked':'')+(level?' upgraded':'')+(activeCity==='michigan'?' art-hotspot':'');tile.style.left=positions[i][0]+'%';tile.style.top=positions[i][1]+'%';tile.setAttribute('aria-label',b.name+', '+(previewLevel<0?'level ':'preview level ')+level);tile.innerHTML=(activeCity==='michigan'?'<span class="hotspot-name">'+b.name+'</span>':landmarkArt(i,level))+'<span class="map-level">'+level+'/5</span>';tile.addEventListener('click',()=>{selectedBuilding=i;render();});map.append(tile);});}
+const michiganAssetNames=['east-pierhead-lighthouse','washington-park-zoo','blue-chip-casino','franklin-street','michigan-city-marina'];
+function renderMap(){
+ const mapFrame=$('cityMap');
+ mapFrame.classList.toggle('michigan-art',activeCity==='michigan');
+ const positions=activeCity==='michigan'?[[31,11],[75,17],[68,47],[14,72],[10,46]]:[[12,16],[55,14],[28,46],[64,48],[8,72]];
+ const map=$('mapBuildings');map.innerHTML='';
+ currentLandmarks().forEach((b,i)=>{
+  const level=previewLevel<0?currentLevels()[i]:previewLevel;
+  const tile=document.createElement('button');tile.type='button';
+  const isMichigan=activeCity==='michigan';
+  tile.className='map-building'+(selectedBuilding===i?' picked':'')+(level?' upgraded':'')+(isMichigan?' art-hotspot layered-landmark':'');
+  tile.style.left=positions[i][0]+'%';tile.style.top=positions[i][1]+'%';
+  tile.setAttribute('aria-label',b.name+', '+(previewLevel<0?'level ':'preview level ')+level);
+  if(isMichigan){
+   const image=document.createElement('img');
+   image.className='landmark-stage-image';
+   image.alt='';image.loading='lazy';image.decoding='async';
+   image.src='assets/michigan-city/'+michiganAssetNames[i]+'/level-'+level+'.webp';
+   image.onerror=()=>{image.hidden=true;tile.classList.add('stage-asset-missing');};
+   tile.append(image);
+   const title=document.createElement('span');title.className='hotspot-name';title.textContent=b.name;tile.append(title);
+  }else{tile.innerHTML=landmarkArt(i,level);}
+  const badge=document.createElement('span');badge.className='map-level';badge.textContent=level+'/5';tile.append(badge);
+  tile.addEventListener('click',()=>{selectedBuilding=i;render();});
+  map.append(tile);
+ });
+}
 function upgrade(i){if(currentLevels()[i]>=5)return;const price=cost(i);if(state.coins<price)return;state.coins-=price;currentLevels()[i]++;save();render();const tile=$('mapBuildings').children[i];if(tile){tile.classList.add('build-pop');setTimeout(()=>tile.classList.remove('build-pop'),650);}}
 let busy=false;
 function randomSymbol(){return symbols[Math.floor(Math.random()*symbols.length)];}
