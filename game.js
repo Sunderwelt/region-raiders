@@ -4,6 +4,7 @@ const landmarks=[{name:'Michigan City Lighthouse',icon:'🌊',base:120},{name:'W
 const symbols=['🪙','🪙','🪙','💎','⭐','🛡️','🎟️'];
 const fresh=()=>({coins:500,spins:30,levels:[0,0,0,0,0],lastRegen:Date.now()});
 let selectedBuilding=0;
+let previewLevel=-1;
 let state;
 try{const saved=JSON.parse(localStorage.getItem(KEY));state=saved&&Number.isFinite(saved.coins)&&Number.isInteger(saved.spins)&&Array.isArray(saved.levels)&&saved.levels.length===5&&Number.isFinite(saved.lastRegen)?saved:fresh();}catch{state=fresh();}
 const $=id=>document.getElementById(id);
@@ -57,7 +58,7 @@ function landmarkArt(i,level){
  return '<svg class="landmark-svg" viewBox="0 0 148 132" xmlns="http://www.w3.org/2000" aria-hidden="true">'+base+art+'</svg>';
 }
 
-function renderMap(){const positions=[[12,16],[55,14],[28,46],[64,48],[8,72]];const map=$('mapBuildings');map.innerHTML='';landmarks.forEach((b,i)=>{const level=state.levels[i];const tile=document.createElement('button');tile.type='button';tile.className='map-building'+(selectedBuilding===i?' picked':'')+(level?' upgraded':'');tile.style.left=positions[i][0]+'%';tile.style.top=positions[i][1]+'%';tile.setAttribute('aria-label',b.name+', level '+level);tile.innerHTML=landmarkArt(i,level)+'<span class="map-level">'+level+'/5</span>';tile.addEventListener('click',()=>{selectedBuilding=i;render();});map.append(tile);});}
+function renderMap(){const positions=[[12,16],[55,14],[28,46],[64,48],[8,72]];const map=$('mapBuildings');map.innerHTML='';landmarks.forEach((b,i)=>{const level=previewLevel<0?state.levels[i]:previewLevel;const tile=document.createElement('button');tile.type='button';tile.className='map-building'+(selectedBuilding===i?' picked':'')+(level?' upgraded':'');tile.style.left=positions[i][0]+'%';tile.style.top=positions[i][1]+'%';tile.setAttribute('aria-label',b.name+', '+(previewLevel<0?'level ':'preview level ')+level);tile.innerHTML=landmarkArt(i,level)+'<span class="map-level">'+level+'/5</span>';tile.addEventListener('click',()=>{selectedBuilding=i;render();});map.append(tile);});}
 function upgrade(i){if(state.levels[i]>=5)return;const price=cost(i);if(state.coins<price)return;state.coins-=price;state.levels[i]++;save();render();const tile=$('mapBuildings').children[i];if(tile){tile.classList.add('build-pop');setTimeout(()=>tile.classList.remove('build-pop'),650);}}
 let busy=false;
 function randomSymbol(){return symbols[Math.floor(Math.random()*symbols.length)];}
@@ -66,4 +67,5 @@ $('spinButton').addEventListener('click',spin);
 function tab(which){$('spinPanel').classList.toggle('hidden',which!=='spin');$('cityPanel').classList.toggle('hidden',which!=='city');$('spinTab').classList.toggle('active',which==='spin');$('cityTab').classList.toggle('active',which==='city');render();}
 $('spinTab').addEventListener('click',()=>tab('spin'));
 $('cityTab').addEventListener('click',()=>tab('city'));
+$('previewLevel').addEventListener('input',event=>{const v=Number(event.target.value);previewLevel=v===0?-1:v-1;$('previewLabel').textContent=previewLevel<0?'Off':'Level '+previewLevel;renderMap();});
 setInterval(render,1000);render();
