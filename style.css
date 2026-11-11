@@ -68,3 +68,8 @@
 .city-map.michigan-art .map-building.layered-landmark .landmark-fallback{bottom:calc(100% + 2px)}
 .city-map.michigan-art .map-building.layered-landmark .hotspot-name{overflow-wrap:anywhere;line-height:1.05;font-size:clamp(9px,2.3vw,12px)}
 .city-map.michigan-art .map-building.layered-landmark .map-level{font-size:11px;flex-shrink:0}
+
+/* MC-12: keep landmark art inside its tile and within the map on narrow screens */
+.city-map.michigan-art .map-building.layered-landmark{width:clamp(94px,27%,132px);max-width:calc(100% - 14px)}
+.city-map.michigan-art .map-building.layered-landmark .landmark-stage-image{width:clamp(112px,30vw,155px);max-height:155px;bottom:calc(100% + 3px)}
+.city-map.michigan-art .map-building.layered-landmark .landmark-fallback{width:110px;bottom:calc(100% + 3px)}
