@@ -24,3 +24,5 @@
 .map-level{position:absolute;bottom:1px;left:36px;font-size:12px;box-shadow:0 2px 4px #0005}
 .map-building.upgraded{background:transparent!important}
 @media(max-width:390px){.map-building{width:82px;height:90px}.landmark-svg{width:90px;height:82px}.map-level{left:25px}}
+
+.art-controls{display:grid;gap:7px;margin:17px 0 10px;padding:12px;border-radius:14px;background:#253c68;text-align:left}.art-controls label{font-weight:700;font-size:14px}.art-controls input{width:100%;accent-color:#ffd45a}.art-controls small{font-size:11px;color:#d5e3ff;line-height:1.5}
