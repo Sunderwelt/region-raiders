@@ -60,3 +60,11 @@
 .city-map.michigan-art .landmark-fallback{display:block;position:absolute;bottom:95%;left:50%;transform:translateX(-50%);width:128px;height:116px;pointer-events:none}
 .city-map.michigan-art .landmark-fallback .landmark-svg{width:128px;height:114px;filter:drop-shadow(4px 8px 3px #173b4280)}
 @media(max-width:390px){.city-map.michigan-art .landmark-fallback{width:106px;height:98px}.city-map.michigan-art .landmark-fallback .landmark-svg{width:106px;height:96px}}
+
+/* v0.9 scenery-only map and mobile-safe selectable building tiles */
+.city-map.michigan-art{background:#6cae72 url('assets/michigan-city-scenery.svg') center/100% 100% no-repeat!important;overflow:hidden}
+.city-map.michigan-art .map-building.layered-landmark{width:clamp(88px,25%,135px);height:55px;transform:translate(-50%,0);box-sizing:border-box}
+.city-map.michigan-art .map-building.layered-landmark.picked{transform:translate(-50%,-3px) scale(1.03)}
+.city-map.michigan-art .map-building.layered-landmark .landmark-fallback{bottom:calc(100% + 2px)}
+.city-map.michigan-art .map-building.layered-landmark .hotspot-name{overflow-wrap:anywhere;line-height:1.05;font-size:clamp(9px,2.3vw,12px)}
+.city-map.michigan-art .map-building.layered-landmark .map-level{font-size:11px;flex-shrink:0}
