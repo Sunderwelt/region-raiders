@@ -50,3 +50,13 @@
 .city-map.michigan-art .landmark-stage-image{display:block;position:absolute;bottom:100%;left:50%;transform:translateX(-50%);width:clamp(110px,24vw,220px);height:auto;max-height:190px;object-fit:contain;pointer-events:none;filter:drop-shadow(3px 8px 5px #102d3570)}
 .city-map.michigan-art .landmark-stage-image[hidden]{display:none}
 .city-map.michigan-art .map-building.stage-asset-missing{border-style:dashed!important}
+
+/* v0.8: Do not display a completed-city painting beneath upgradeable landmarks.
+   Scenery-only art can replace this procedural background later. */
+.city-map.michigan-art{
+ background-image:radial-gradient(ellipse at 76% 18%,#83bd70 0 17%,transparent 43%),linear-gradient(154deg,#0c6ca5 0%,#21a1ca 28%,#f0d69b 33%,#81ba72 40%,#5caa6b 100%)!important;
+}
+.city-map.michigan-art .map-building.layered-landmark{z-index:6}
+.city-map.michigan-art .landmark-fallback{display:block;position:absolute;bottom:95%;left:50%;transform:translateX(-50%);width:128px;height:116px;pointer-events:none}
+.city-map.michigan-art .landmark-fallback .landmark-svg{width:128px;height:114px;filter:drop-shadow(4px 8px 3px #173b4280)}
+@media(max-width:390px){.city-map.michigan-art .landmark-fallback{width:106px;height:98px}.city-map.michigan-art .landmark-fallback .landmark-svg{width:106px;height:96px}}
